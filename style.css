@@ -4,6 +4,21 @@
   border: 2px solid red;
 }
 
+#boardControlsLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid blue;
+}
+
+#boardControlsRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid blue;
+}
+
 #board {
   display: flex;
   flex-direction: column;

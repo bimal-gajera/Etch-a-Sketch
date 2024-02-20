@@ -7,9 +7,6 @@ let boardcontrolLeftDiv = document.getElementById("boardControlsLeft");
 let boardcontrolRightDiv = document.getElementById("boardControlsRight");
 let gridSize = 16;
 
-let selectedColor = "black";
-let colorMode = "color palette";
-
 let changeGridBtn = document.createElement("BUTTON");
 changeGridBtn.textContent = "Change Grid Size";
 changeGridBtn.id = "gridSizeBtn";
@@ -18,6 +15,49 @@ changeGridBtn.addEventListener("click", () => {
   gridSize = prompt("Enter grid size: ");
   changeGridSize(gridSize);
 });
+
+
+let selectedColor = "black";
+let colorMode = "color palette";
+// color palette, random color, eraser
+
+let colorModeBtn = document.createElement("select");
+let mode1 = document.createElement("option");
+mode1.text = "color palette";
+colorModeBtn.add(mode1);
+let mode2 = document.createElement("option");
+mode2.text = "random color";
+colorModeBtn.add(mode2);
+
+boardcontrolRightDiv.appendChild(colorModeBtn);
+
+colorModeBtn.onchange = function () {
+  colorMode = colorModeBtn.value;
+};
+
+
+let changeColorBtn = document.createElement("BUTTON");
+changeColorBtn.textContent = "Change Color";
+changeColorBtn.id = "changeColor";
+
+changeColorBtn.addEventListener("click", () => {
+  if (colorMode == "color palette") {
+    selectedColor = prompt("Enter color keyword or hex value: ");
+  }
+  else if (colorMode == "random color") {
+    alert("Invalid color mode!\n To change color, select color mode to \"color palette\"");
+  }
+});
+boardcontrolRightDiv.appendChild(changeColorBtn);
+
+
+let resetGridBtn = document.createElement("button");
+resetGridBtn.textContent = "Reset Grid";
+resetGridBtn.id = "resetgrid";
+resetGridBtn.addEventListener("click", () => {
+  changeGridSize(16);
+});
+boardcontrolLeftDiv.appendChild(resetGridBtn);
 
 
 function changeGridSize(size) {
@@ -38,6 +78,11 @@ function changeGridSize(size) {
     boardDiv.appendChild(row);
   }
   addPaintListeners();
+}
+
+
+function randomColor() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 
