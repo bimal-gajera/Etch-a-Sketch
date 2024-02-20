@@ -1,0 +1,23 @@
+#boardContainer {
+  display: flex;
+  justify-content: space-evenly;
+  border: 2px solid red;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 600px;
+  border: 5px solid black;
+}
+
+.row {
+  display: flex;
+  flex-grow: 1;
+}
+
+.block {
+  border: 1px dotted black;
+  flex-grow: 1;
+}
