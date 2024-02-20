@@ -3,7 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let boardDiv = document.getElementById("board");
+let boardcontrolLeftDiv = document.getElementById("boardControlsLeft");
+let boardcontrolRightDiv = document.getElementById("boardControlsRight");
 let gridSize = 16;
+
+let selectedColor = "black";
+let colorMode = "color palette";
+
+let changeGridBtn = document.createElement("BUTTON");
+changeGridBtn.textContent = "Change Grid Size";
+changeGridBtn.id = "gridSizeBtn";
+boardcontrolLeftDiv.appendChild(changeGridBtn);
+changeGridBtn.addEventListener("click", () => {
+  gridSize = prompt("Enter grid size: ");
+  changeGridSize(gridSize);
+});
+
 
 function changeGridSize(size) {
   boardDiv.textContent = "";
@@ -22,8 +37,32 @@ function changeGridSize(size) {
     }
     boardDiv.appendChild(row);
   }
+  addPaintListeners();
 }
+
+
+function paintBlock(block, color) {
+  block.style.backgroundColor = color;
+}
+
+
+function addPaintListeners() {
+  let blockList = document.getElementsByClassName("block");
+
+  for (let i = 0; i < blockList.length; i++) {
+    blockList[i].addEventListener("mouseover", () => {
+      if (colorMode == "color palette") {
+        paintBlock(blockList[i], selectedColor);
+      }
+      else if (colorMode == "random color") {
+        paintBlock(blockList[i], randomColor());
+      }
+    })
+  }
+}
+
 
 function main() {
   changeGridSize(gridSize);
+  addPaintListeners();
 }
