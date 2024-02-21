@@ -94,9 +94,6 @@ resetGridBtn.textContent = "Reset Grid";
 resetGridBtn.id = "resetgrid";
 resetGridBtn.addEventListener("click", () => {
   changeGridSize(16);
-  gBtn = document.getElementById("toggleGrid");
-  gBtn.textContent = "Disable Grid";
-  gBtn.style.backgroundColor = "black";
 });
 boardcontrolLeftDiv.appendChild(resetGridBtn);
 
@@ -133,6 +130,10 @@ function changeGridSize(size) {
     boardDiv.appendChild(row);
   }
   addPaintListeners();
+
+  gBtn = document.getElementById("toggleGrid");
+  gBtn.textContent = "Disable Grid";
+  gBtn.style.backgroundColor = "black";
 }
 
 
