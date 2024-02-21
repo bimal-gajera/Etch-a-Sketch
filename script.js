@@ -17,6 +17,32 @@ changeGridBtn.addEventListener("click", () => {
 });
 
 
+let toggleGridBtn = document.createElement("button");
+toggleGridBtn.textContent = "Disable Grid";
+toggleGridBtn.id = "toggleGrid";
+toggleGridBtn.addEventListener("click", () => {
+  toggleGrid();
+});
+boardcontrolLeftDiv.appendChild(toggleGridBtn);
+
+function toggleGrid() {
+  let gridBtn = document.getElementById("toggleGrid");
+  let blockArr = document.getElementsByClassName("block");
+  const blocks = Array.from(blockArr);
+  blocks.forEach(block => {
+    block.classList.toggle('blockborder');
+  });
+  if (gridBtn.textContent == "Disable Grid") {
+    gridBtn.textContent = "Enable Grid";
+    gridBtn.style.backgroundColor = "gray";
+  }
+  else {
+    gridBtn.textContent = "Disable Grid";
+    gridBtn.style.backgroundColor = "black";
+  }
+}
+
+
 let selectedColor = "black";
 let colorMode = "color palette";
 // color palette, random color, eraser
@@ -46,15 +72,6 @@ eraserBtn.addEventListener("click", () => {
 })
 boardcontrolRightDiv.appendChild(eraserBtn);
 
-function toggleEraser() {
-  if (eraserBtn.value == "off") {
-    eraserBtn.value = "on";
-  }
-  else {
-    eraserBtn.value = "off";
-  }
-}
-
 
 
 let changeColorBtn = document.createElement("BUTTON");
@@ -77,8 +94,25 @@ resetGridBtn.textContent = "Reset Grid";
 resetGridBtn.id = "resetgrid";
 resetGridBtn.addEventListener("click", () => {
   changeGridSize(16);
+  gBtn = document.getElementById("toggleGrid");
+  gBtn.textContent = "Disable Grid";
+  gBtn.style.backgroundColor = "black";
 });
 boardcontrolLeftDiv.appendChild(resetGridBtn);
+
+
+
+function toggleEraser() {
+  if (eraserBtn.value == "off") {
+    eraserBtn.value = "on";
+    eraserBtn.style.backgroundColor = "gray";
+  }
+  else {
+    eraserBtn.value = "off";
+    eraserBtn.style.backgroundColor = "black";
+  }
+}
+
 
 
 function changeGridSize(size) {
@@ -93,7 +127,7 @@ function changeGridSize(size) {
     row.classList = "row";
     for (let j = 0; j < size; j++) {
       const block = document.createElement("div");
-      block.classList = "block";
+      block.classList.add("block", "blockborder");
       row.appendChild(block);
     }
     boardDiv.appendChild(row);

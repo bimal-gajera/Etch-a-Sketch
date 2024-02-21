@@ -35,8 +35,11 @@ body {
 }
 
 .block {
-  border: 1px dotted black;
   flex-grow: 1;
+}
+
+.blockborder {
+  border: 1px dotted black;
 }
 
 button,
