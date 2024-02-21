@@ -8,7 +8,7 @@ let boardcontrolRightDiv = document.getElementById("boardControlsRight");
 let gridSize = 16;
 
 let changeGridBtn = document.createElement("BUTTON");
-changeGridBtn.textContent = "Change Grid Size";
+changeGridBtn.textContent = "Resize Grid";
 changeGridBtn.id = "gridSizeBtn";
 boardcontrolLeftDiv.appendChild(changeGridBtn);
 changeGridBtn.addEventListener("click", () => {
@@ -22,6 +22,7 @@ let colorMode = "color palette";
 // color palette, random color, eraser
 
 let colorModeBtn = document.createElement("select");
+colorModeBtn.id = "colormode";
 let mode1 = document.createElement("option");
 mode1.text = "color palette";
 colorModeBtn.add(mode1);
@@ -34,6 +35,26 @@ boardcontrolRightDiv.appendChild(colorModeBtn);
 colorModeBtn.onchange = function () {
   colorMode = colorModeBtn.value;
 };
+
+
+let eraserBtn = document.createElement("button");
+eraserBtn.textContent = "Eraser";
+eraserBtn.id = "eraser";
+eraserBtn.value = "off";
+eraserBtn.addEventListener("click", () => {
+  toggleEraser();
+})
+boardcontrolRightDiv.appendChild(eraserBtn);
+
+function toggleEraser() {
+  if (eraserBtn.value == "off") {
+    eraserBtn.value = "on";
+  }
+  else {
+    eraserBtn.value = "off";
+  }
+}
+
 
 
 let changeColorBtn = document.createElement("BUTTON");
@@ -87,7 +108,12 @@ function randomColor() {
 
 
 function paintBlock(block, color) {
-  block.style.backgroundColor = color;
+  if (eraserBtn.value == "on") {
+    block.style.backgroundColor = "white";
+  }
+  else {
+    block.style.backgroundColor = color;
+  }
 }
 
 
@@ -105,6 +131,7 @@ function addPaintListeners() {
     })
   }
 }
+
 
 
 function main() {
